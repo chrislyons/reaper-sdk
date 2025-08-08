@@ -4,8 +4,9 @@ Paths:
 
 sdk/             -- contains headers to use
 reaper-plugins/  -- contains source to some plug-ins which are included with REAPER
-                    (these are not to be used as models for well-designed plug-ins, 
+                    (these are not to be used as models for well-designed plug-ins,
                     but they may be useful and/or available for LGPL compliance ;)
+sdk/example_stream -- demonstrates basic audio streaming with reaper_stream
 
 Paths that should be added in order to compile:
 
@@ -16,3 +17,9 @@ To compile most of this, merge or symlink in WDL:
 git remote add wdl https://github.com/justinfrankel/WDL.git
 git fetch --all
 git merge --allow-unrelated-histories wdl/main
+
+The `reaper_stream` module under `sdk/` offers basic WebSocket or SRT
+connection management via `stream_open`, `stream_send`, and
+`stream_receive`, allowing extensions to transmit `PCM_source_transfer_t`
+audio blocks over the network. A minimal example lives in
+`sdk/example_stream`.
