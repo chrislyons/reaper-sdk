@@ -1398,9 +1398,9 @@ REAPERAPI_DEF //==============================================
 #if defined(REAPERAPI_WANT_FreezeTrack) || !defined(REAPERAPI_MINIMAL)
 REAPERAPI_DEF //==============================================
 // FreezeTrack
-// offline render track FX chain
-//   flags & FREEZE_FLAG_FXONLY       : render FX only, preserve items
-//   flags & FREEZE_FLAG_PRESERVESENDS: keep existing track sends
+// Render the track FX chain to a temporary media item and optionally freeze only FX or preserve sends
+//   flags & FREEZE_FLAG_FXONLY        : render FX output but keep original items
+//   flags & FREEZE_FLAG_PRESERVESENDS : keep existing track sends active
 
   void (*REAPERAPI_FUNCNAME(FreezeTrack))(MediaTrack* tr, int flags);
 #endif
@@ -7660,7 +7660,7 @@ REAPERAPI_DEF //==============================================
 #if defined(REAPERAPI_WANT_UnfreezeTrack) || !defined(REAPERAPI_MINIMAL)
 REAPERAPI_DEF //==============================================
 // UnfreezeTrack
-// restore track state frozen by FreezeTrack
+// Restore media items and FX offline state stored by FreezeTrack
 
   void (*REAPERAPI_FUNCNAME(UnfreezeTrack))(MediaTrack* tr);
 #endif
