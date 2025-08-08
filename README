@@ -4,15 +4,22 @@ Paths:
 
 sdk/             -- contains headers to use
 reaper-plugins/  -- contains source to some plug-ins which are included with REAPER
-                    (these are not to be used as models for well-designed plug-ins, 
+                    (these are not to be used as models for well-designed plug-ins,
                     but they may be useful and/or available for LGPL compliance ;)
 
 Paths that should be added in order to compile:
 
 WDL/
 
-To compile most of this, merge or symlink in WDL:
+To compile most of this, initialize the WDL submodule:
 
-git remote add wdl https://github.com/justinfrankel/WDL.git
-git fetch --all
-git merge --allow-unrelated-histories wdl/main
+git submodule update --init WDL
+
+git submodule update --init --recursive    # if nested modules are needed
+
+ARA2 processor attachment:
+
+Extensions can attach ARA2 processors directly to media items using
+ARA_AttachProcessorToMediaItem() to associate a processor with an item and
+ARA_DetachProcessorFromMediaItem() to remove it again. The optional stateData
+parameter allows passing serialized processor state to the host.
