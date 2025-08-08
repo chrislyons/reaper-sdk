@@ -5449,6 +5449,22 @@ REAPERAPI_DEF //==============================================
   void (*REAPERAPI_FUNCNAME(PreventUIRefresh))(int prevent_count);
 #endif
 
+#if defined(REAPERAPI_WANT_Project_ExportOTIO) || !defined(REAPERAPI_MINIMAL)
+REAPERAPI_DEF //==============================================
+// Project_ExportOTIO
+// Export the specified project to an OTIO file.
+
+  bool (*REAPERAPI_FUNCNAME(Project_ExportOTIO))(ReaProject* proj, const char* fn);
+#endif
+
+#if defined(REAPERAPI_WANT_Project_ImportOTIO) || !defined(REAPERAPI_MINIMAL)
+REAPERAPI_DEF //==============================================
+// Project_ImportOTIO
+// Import an OTIO file into a new project and return it.
+
+  ReaProject* (*REAPERAPI_FUNCNAME(Project_ImportOTIO))(const char* fn);
+#endif
+
 #if defined(REAPERAPI_WANT_projectconfig_var_addr) || !defined(REAPERAPI_MINIMAL)
 REAPERAPI_DEF //==============================================
 // projectconfig_var_addr
@@ -9538,6 +9554,12 @@ REAPERAPI_DEF //==============================================
       #endif
       #if defined(REAPERAPI_WANT_PreventUIRefresh) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(PreventUIRefresh),"PreventUIRefresh"},
+      #endif
+      #if defined(REAPERAPI_WANT_Project_ExportOTIO) || !defined(REAPERAPI_MINIMAL)
+        {(void**)&REAPERAPI_FUNCNAME(Project_ExportOTIO),"Project_ExportOTIO"},
+      #endif
+      #if defined(REAPERAPI_WANT_Project_ImportOTIO) || !defined(REAPERAPI_MINIMAL)
+        {(void**)&REAPERAPI_FUNCNAME(Project_ImportOTIO),"Project_ImportOTIO"},
       #endif
       #if defined(REAPERAPI_WANT_projectconfig_var_addr) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(projectconfig_var_addr),"projectconfig_var_addr"},
