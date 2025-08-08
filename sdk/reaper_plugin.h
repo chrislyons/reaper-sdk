@@ -1517,6 +1517,10 @@ typedef struct _REAPER_reaper_csurf_reg_t
 #define UNDO_STATE_POOLEDENVS 128 // contents of pooled envs -- not position, length, rate etc of pooled env instances, which is part of envelope state
 #endif
 
+// FreezeTrack flags
+#define FREEZE_FLAG_FXONLY 1        // render FX chain only, keep original media
+#define FREEZE_FLAG_PRESERVESENDS 2 // do not disable existing track sends during freeze
+
 #ifndef IS_MSG_VIRTKEY
   #ifdef _WIN32
     #define IS_MSG_VIRTKEY(msg) ((msg)->message != WM_CHAR)

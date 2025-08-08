@@ -1395,6 +1395,16 @@ REAPERAPI_DEF //==============================================
   void (*REAPERAPI_FUNCNAME(FreeHeapPtr))(void* ptr);
 #endif
 
+#if defined(REAPERAPI_WANT_FreezeTrack) || !defined(REAPERAPI_MINIMAL)
+REAPERAPI_DEF //==============================================
+// FreezeTrack
+// offline render track FX chain
+//   flags & FREEZE_FLAG_FXONLY       : render FX only, preserve items
+//   flags & FREEZE_FLAG_PRESERVESENDS: keep existing track sends
+
+  void (*REAPERAPI_FUNCNAME(FreezeTrack))(MediaTrack* tr, int flags);
+#endif
+
 #if defined(REAPERAPI_WANT_genGuid) || !defined(REAPERAPI_MINIMAL)
 REAPERAPI_DEF //==============================================
 // genGuid
@@ -7647,6 +7657,14 @@ REAPERAPI_DEF //==============================================
   void (*REAPERAPI_FUNCNAME(Undo_OnStateChangeEx2))(ReaProject* proj, const char* descchange, int whichStates, int trackparm);
 #endif
 
+#if defined(REAPERAPI_WANT_UnfreezeTrack) || !defined(REAPERAPI_MINIMAL)
+REAPERAPI_DEF //==============================================
+// UnfreezeTrack
+// restore track state frozen by FreezeTrack
+
+  void (*REAPERAPI_FUNCNAME(UnfreezeTrack))(MediaTrack* tr);
+#endif
+
 #if defined(REAPERAPI_WANT_update_disk_counters) || !defined(REAPERAPI_MINIMAL)
 REAPERAPI_DEF //==============================================
 // update_disk_counters
@@ -8221,6 +8239,9 @@ REAPERAPI_DEF //==============================================
       #endif
       #if defined(REAPERAPI_WANT_FreeHeapPtr) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(FreeHeapPtr),"FreeHeapPtr"},
+      #endif
+      #if defined(REAPERAPI_WANT_FreezeTrack) || !defined(REAPERAPI_MINIMAL)
+        {(void**)&REAPERAPI_FUNCNAME(FreezeTrack),"FreezeTrack"},
       #endif
       #if defined(REAPERAPI_WANT_genGuid) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(genGuid),"genGuid"},
@@ -10261,6 +10282,9 @@ REAPERAPI_DEF //==============================================
       #endif
       #if defined(REAPERAPI_WANT_Undo_OnStateChangeEx2) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(Undo_OnStateChangeEx2),"Undo_OnStateChangeEx2"},
+      #endif
+      #if defined(REAPERAPI_WANT_UnfreezeTrack) || !defined(REAPERAPI_MINIMAL)
+        {(void**)&REAPERAPI_FUNCNAME(UnfreezeTrack),"UnfreezeTrack"},
       #endif
       #if defined(REAPERAPI_WANT_update_disk_counters) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(update_disk_counters),"update_disk_counters"},
