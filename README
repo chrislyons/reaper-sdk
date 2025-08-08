@@ -18,8 +18,3 @@ git remote add wdl https://github.com/justinfrankel/WDL.git
 git fetch --all
 git merge --allow-unrelated-histories wdl/main
 
-The `reaper_stream` module under `sdk/` offers basic WebSocket or SRT
-connection management via `stream_open`, `stream_send`, and
-`stream_receive`, allowing extensions to transmit `PCM_source_transfer_t`
-audio blocks over the network. A minimal example lives in
-`sdk/example_stream`.
