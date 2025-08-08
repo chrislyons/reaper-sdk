@@ -6452,6 +6452,27 @@ REAPERAPI_DEF //==============================================
   int (*REAPERAPI_FUNCNAME(StopTrackPreview2))(ReaProject* proj, preview_register_t* preview);
 #endif
 
+#if defined(REAPERAPI_WANT_stream_open) || !defined(REAPERAPI_MINIMAL)
+REAPERAPI_DEF //==============================================
+// stream_open
+// Open a network stream via WebSocket or SRT URL.
+  void* (*REAPERAPI_FUNCNAME(stream_open))(const char* url);
+#endif
+
+#if defined(REAPERAPI_WANT_stream_receive) || !defined(REAPERAPI_MINIMAL)
+REAPERAPI_DEF //==============================================
+// stream_receive
+// Receive an audio block from a network stream.
+  bool (*REAPERAPI_FUNCNAME(stream_receive))(void* handle, PCM_source_transfer_t* block);
+#endif
+
+#if defined(REAPERAPI_WANT_stream_send) || !defined(REAPERAPI_MINIMAL)
+REAPERAPI_DEF //==============================================
+// stream_send
+// Send an audio block over a network stream.
+  bool (*REAPERAPI_FUNCNAME(stream_send))(void* handle, PCM_source_transfer_t* block);
+#endif
+
 #if defined(REAPERAPI_WANT_stringToGuid) || !defined(REAPERAPI_MINIMAL)
 REAPERAPI_DEF //==============================================
 // stringToGuid
@@ -7645,27 +7666,6 @@ REAPERAPI_DEF //==============================================
 // trackparm=-1 by default,or if updating one fx chain,you can specify track index
 
   void (*REAPERAPI_FUNCNAME(Undo_OnStateChangeEx2))(ReaProject* proj, const char* descchange, int whichStates, int trackparm);
-#endif
-
-#if defined(REAPERAPI_WANT_stream_open) || !defined(REAPERAPI_MINIMAL)
-REAPERAPI_DEF //==============================================
-// stream_open
-// Open a network stream via WebSocket or SRT URL.
-  void* (*REAPERAPI_FUNCNAME(stream_open))(const char* url);
-#endif
-
-#if defined(REAPERAPI_WANT_stream_send) || !defined(REAPERAPI_MINIMAL)
-REAPERAPI_DEF //==============================================
-// stream_send
-// Send an audio block over a network stream.
-  bool (*REAPERAPI_FUNCNAME(stream_send))(void* handle, PCM_source_transfer_t* block);
-#endif
-
-#if defined(REAPERAPI_WANT_stream_receive) || !defined(REAPERAPI_MINIMAL)
-REAPERAPI_DEF //==============================================
-// stream_receive
-// Receive an audio block from a network stream.
-  bool (*REAPERAPI_FUNCNAME(stream_receive))(void* handle, PCM_source_transfer_t* block);
 #endif
 
 #if defined(REAPERAPI_WANT_update_disk_counters) || !defined(REAPERAPI_MINIMAL)
@@ -9875,6 +9875,15 @@ REAPERAPI_DEF //==============================================
       #if defined(REAPERAPI_WANT_StopTrackPreview2) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(StopTrackPreview2),"StopTrackPreview2"},
       #endif
+      #if defined(REAPERAPI_WANT_stream_open) || !defined(REAPERAPI_MINIMAL)
+        {(void**)&REAPERAPI_FUNCNAME(stream_open),"stream_open"},
+      #endif
+      #if defined(REAPERAPI_WANT_stream_receive) || !defined(REAPERAPI_MINIMAL)
+        {(void**)&REAPERAPI_FUNCNAME(stream_receive),"stream_receive"},
+      #endif
+      #if defined(REAPERAPI_WANT_stream_send) || !defined(REAPERAPI_MINIMAL)
+        {(void**)&REAPERAPI_FUNCNAME(stream_send),"stream_send"},
+      #endif
       #if defined(REAPERAPI_WANT_stringToGuid) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(stringToGuid),"stringToGuid"},
       #endif
@@ -10282,15 +10291,6 @@ REAPERAPI_DEF //==============================================
       #endif
       #if defined(REAPERAPI_WANT_Undo_OnStateChangeEx2) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(Undo_OnStateChangeEx2),"Undo_OnStateChangeEx2"},
-      #endif
-      #if defined(REAPERAPI_WANT_stream_open) || !defined(REAPERAPI_MINIMAL)
-        {(void**)&REAPERAPI_FUNCNAME(stream_open),"stream_open"},
-      #endif
-      #if defined(REAPERAPI_WANT_stream_send) || !defined(REAPERAPI_MINIMAL)
-        {(void**)&REAPERAPI_FUNCNAME(stream_send),"stream_send"},
-      #endif
-      #if defined(REAPERAPI_WANT_stream_receive) || !defined(REAPERAPI_MINIMAL)
-        {(void**)&REAPERAPI_FUNCNAME(stream_receive),"stream_receive"},
       #endif
       #if defined(REAPERAPI_WANT_update_disk_counters) || !defined(REAPERAPI_MINIMAL)
         {(void**)&REAPERAPI_FUNCNAME(update_disk_counters),"update_disk_counters"},
