@@ -4,8 +4,11 @@ Paths:
 
 sdk/             -- contains headers to use
 reaper-plugins/  -- contains source to some plug-ins which are included with REAPER
-                    (these are not to be used as models for well-designed plug-ins, 
+                    (these are not to be used as models for well-designed plug-ins,
                     but they may be useful and/or available for LGPL compliance ;)
+                    The `stt_utils` helper demonstrates how to feed
+                    `PCM_source_transfer_t` blocks to a speech-to-text engine and
+                    annotate a project with word markers.
 
 Paths that should be added in order to compile:
 
