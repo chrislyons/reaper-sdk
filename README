@@ -16,3 +16,25 @@ To compile most of this, merge or symlink in WDL:
 git remote add wdl https://github.com/justinfrankel/WDL.git
 git fetch --all
 git merge --allow-unrelated-histories wdl/main
+
+Building with CMake
+-------------------
+
+This repository includes a top-level CMake project that exposes the SDK
+headers and builds a few sample plug-ins.  After cloning or linking the
+WDL directory as described above, generate build files for your platform:
+
+```
+cmake -S . -B build
+cmake --build build
+```
+
+Specific targets can be built by name using `cmake --build build --target <name>`.
+The available sample targets are:
+
+* `example_m3u` (Windows only)
+* `example_raw`
+* `reaper_csurf`
+* `reaper_mp3`
+
+Use CMake's `-G` option to select a generator for your compiler or IDE.
