@@ -9,13 +9,11 @@ reaper-plugins/  -- contains source to some plug-ins which are included with REA
 
 Paths that should be added in order to compile:
 
-WDL/
+WDL/             -- initialized as a git submodule
 
-To compile most of this, initialize the WDL submodule:
+After cloning this repository, fetch the WDL contents:
 
-git submodule update --init WDL
-
-git submodule update --init --recursive    # if nested modules are needed
+git submodule update --init --recursive
 
 ARA2 processor attachment:
 
