@@ -22,6 +22,7 @@ void (*gOnMallocFailPtr)(int);
 #include "../../WDL/ptrlist.h"
 #include "../../WDL/assocarray.h"
 #include "../../WDL/mutex.h"
+#include "../../sdk/config_ini.h"
 
 #include "../../WDL/fileread.h"
 
@@ -1103,8 +1104,8 @@ REAPER_PLUGIN_DLL_EXPORT int REAPER_PLUGIN_ENTRYPOINT(REAPER_PLUGIN_HINSTANCE hI
         !rec->Register)
           return 0;
 
-    g_config_reapindex_minsize = GetPrivateProfileInt("REAPER","reapindex_minsize",
-        g_config_reapindex_minsize,get_ini_file());
+    g_config_reapindex_minsize = config_ini::getInt(get_ini_file(),"REAPER","reapindex_minsize",
+        g_config_reapindex_minsize);
 
     IMPORT_LOCALIZE_RPLUG(rec)
 
