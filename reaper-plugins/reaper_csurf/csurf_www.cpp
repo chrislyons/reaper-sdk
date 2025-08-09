@@ -6,6 +6,7 @@
 #include "../../WDL/lineparse.h"
 #include "../../WDL/dirscan.h"
 #include "../../WDL/assocarray.h"
+#include "../../sdk/config_ini.h"
 
 #include "../../WDL/jnetlib/jnetlib.h"
 
@@ -592,7 +593,7 @@ public:
     {
       char fmt[32], tmp[256];
       snprintf(fmt,sizeof(fmt),"header%d",x+1);
-      GetPrivateProfileString("csurf_www",fmt,"!",tmp,sizeof(tmp),get_ini_file());
+      config_ini::getString(get_ini_file(),"csurf_www",fmt,"!",tmp,sizeof(tmp));
       if (!strcmp(tmp,"!")) break;
       if (strstr(tmp,":")) m_extra_headers.Add(strdup(tmp));
     }

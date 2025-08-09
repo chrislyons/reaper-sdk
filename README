@@ -92,12 +92,24 @@ The resulting `reaper_csurf.dll` will be in the current directory.
    export WDL_PATH="$REAPER_SDK/WDL"
    ```
 
-3. Build the sample plug-in:
+3. Generate the SWELL resources (required when a plug-in has a
+   `res.rc` file):
 
    ```sh
-   clang++ -dynamiclib -std=c++11 -I"$REAPER_SDK/sdk" -I"$WDL_PATH" \
+   $WDL_PATH/swell/swell_dlggen reaper-plugins/reaper_csurf/res.rc \
+     > reaper-plugins/reaper_csurf/res.rc_mac_dlg
+   $WDL_PATH/swell/swell_menu reaper-plugins/reaper_csurf/res.rc \
+     > reaper-plugins/reaper_csurf/res.rc_mac_menu
+   ```
+
+4. Build a universal plug-in and link the required frameworks:
+
+   ```sh
+   clang++ -dynamiclib -std=c++11 -arch x86_64 -arch arm64 \
+     -I"$REAPER_SDK/sdk" -I"$WDL_PATH/WDL" \
      reaper-plugins/reaper_csurf/csurf_main.cpp \
      reaper-plugins/reaper_csurf/*.cpp \
+     -framework Cocoa -framework CoreAudio -framework CoreMIDI \
      -o reaper_csurf.dylib
    ```
 
