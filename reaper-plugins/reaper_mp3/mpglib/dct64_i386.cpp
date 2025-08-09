@@ -8,12 +8,13 @@
 
 #include "StdAfx.h"
 
-#ifdef MPGLIB_HAVE_ASM
-extern "C" 
+#if defined(MPGLIB_HAVE_ASM) && \
+    (defined(__i386__) || defined(_M_IX86) || defined(__x86_64__))
+extern "C"
 {
-	void __cdecl dct64_asm_x87(real *out0,real *out1,real *b1,real *b2,real *samples);
-	void __cdecl dct64_asm_3dnow(real *out0,real *out1,real *b1,real *b2,real *samples);
-	int __cdecl detect_3dnow_ex();
+        void __cdecl dct64_asm_x87(real *out0,real *out1,real *b1,real *b2,real *samples);
+        void __cdecl dct64_asm_3dnow(real *out0,real *out1,real *b1,real *b2,real *samples);
+        int __cdecl detect_3dnow_ex();
 };
 
 static void (__cdecl * p_dct64_asm)(real *out0,real *out1,real *b1,real *b2,real *samples) = detect_3dnow_ex() ? dct64_asm_3dnow : dct64_asm_x87;

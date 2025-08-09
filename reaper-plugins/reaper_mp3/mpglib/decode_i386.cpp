@@ -108,11 +108,12 @@ static void
     }
 }
 
-#ifdef MPGLIB_HAVE_ASM
-extern "C" 
+#if defined(MPGLIB_HAVE_ASM) && \
+    (defined(__i386__) || defined(_M_IX86) || defined(__x86_64__))
+extern "C"
 {
-	float synth_sampleconv_scale[2] = {(float)(1.0 / (double)0x8000),0};
-	float synth_sampleconv_scale_neg[2] = {(float)(- 1.0 / (double)0x8000),0};
+        float synth_sampleconv_scale[2] = {(float)(1.0 / (double)0x8000),0};
+        float synth_sampleconv_scale_neg[2] = {(float)(- 1.0 / (double)0x8000),0};
 
 	int __cdecl detect_3dnow_ex();
 

@@ -26,13 +26,14 @@ static real tfcos12[3];
 
 
 
-#ifdef MPGLIB_HAVE_ASM
+#if defined(MPGLIB_HAVE_ASM) && \
+    (defined(__i386__) || defined(_M_IX86) || defined(__x86_64__))
 extern "C"
 {
-	float ms_stereo_extrascalefactor[2] = {1.0 / sqrt(2.0),1.0 / sqrt(2.0)};
-	void __cdecl do_ms_stereo_x87(real * in0,real * in1,unsigned count);
-	void __cdecl do_ms_stereo_3dnow(real * in0,real * in1,unsigned count);
-	int __cdecl detect_3dnow();
+        float ms_stereo_extrascalefactor[2] = {1.0 / sqrt(2.0),1.0 / sqrt(2.0)};
+        void __cdecl do_ms_stereo_x87(real * in0,real * in1,unsigned count);
+        void __cdecl do_ms_stereo_3dnow(real * in0,real * in1,unsigned count);
+        int __cdecl detect_3dnow();
 }
 
 typedef void (__fastcall * t_do_ms_stereo)(real * in0,real * in1,unsigned count);
@@ -1693,14 +1694,15 @@ int mpglib::do_layer3(sample *pcm_sample,int *pcm_point)
 
 		  if(ms_stereo) {
 			  profiler(mpglib_do_layer3_ms_stereo);
-#ifdef MPGLIB_HAVE_ASM
-			  p_do_ms_stereo((real*)hybridIn[0],(real*)hybridIn[1],SBLIMIT*SSLIMIT);
+#if defined(MPGLIB_HAVE_ASM) && \
+    (defined(__i386__) || defined(_M_IX86) || defined(__x86_64__))
+                          p_do_ms_stereo((real*)hybridIn[0],(real*)hybridIn[1],SBLIMIT*SSLIMIT);
 #else
-			  static const real extrascalefactor = 1.0 / sqrt(2.0);
-				int i;
-				for(i=0;i<SBLIMIT*SSLIMIT;i++) {
-					real tmp0,tmp1;
-					tmp0 = ((real *) hybridIn[0])[i] * extrascalefactor;
+                          static const real extrascalefactor = 1.0 / sqrt(2.0);
+                                int i;
+                                for(i=0;i<SBLIMIT*SSLIMIT;i++) {
+                                        real tmp0,tmp1;
+                                        tmp0 = ((real *) hybridIn[0])[i] * extrascalefactor;
 					tmp1 = ((real *) hybridIn[1])[i] * extrascalefactor;
 					((real *) hybridIn[1])[i] = tmp0 - tmp1;  
 					((real *) hybridIn[0])[i] = tmp0 + tmp1;
