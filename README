@@ -16,8 +16,8 @@ REAPER C/C++ extension plug-in mini-SDK
   (MinGW-w64) on Windows, the Xcode command line tools on macOS, or
   GCC/Clang 9+ on Linux.
 * Environment variables pointing at the sources:
-  * `REAPER_SDK` – path to this repository.
-  * `WDL_PATH` – path to the WDL checkout (defaults to `$REAPER_SDK/WDL`).
+* `ORPHEUS_SDK` – path to this repository.
+* `WDL_PATH` – path to the WDL checkout (defaults to `$ORPHEUS_SDK/WDL`).
 
 The headers live in `sdk/` and sample plug-ins live in
 `reaper-plugins/` (these plug-ins ship with REAPER and are useful as
@@ -69,14 +69,14 @@ macOS, and GCC/Clang on Linux.
 2. Set environment variables:
 
    ```bat
-   set REAPER_SDK=C:\path\to\reaper-sdk
-   set WDL_PATH=%REAPER_SDK%\WDL
+   set ORPHEUS_SDK=C:\path\to\orpheus-sdk
+   set WDL_PATH=%ORPHEUS_SDK%\WDL
    ```
 
 3. Build the sample control surface plug-in:
 
    ```bat
-   msbuild %REAPER_SDK%\reaper-plugins\reaper_csurf\reaper_csurf.vcxproj /p:Configuration=Release
+   msbuild %ORPHEUS_SDK%\reaper-plugins\reaper_csurf\reaper_csurf.vcxproj /p:Configuration=Release
    ```
 
 The resulting `reaper_csurf.dll` will be in the project's `Release`
@@ -89,14 +89,14 @@ folder.
 2. Set environment variables:
 
    ```sh
-   export REAPER_SDK="/path/to/reaper-sdk"
-   export WDL_PATH="$REAPER_SDK/WDL"
+   export ORPHEUS_SDK="/path/to/orpheus-sdk"
+   export WDL_PATH="$ORPHEUS_SDK/WDL"
    ```
 
 3. Build the sample control surface plug-in:
 
    ```sh
-   x86_64-w64-mingw32-g++ -shared -std=c++11 -I"$REAPER_SDK/sdk" -I"$WDL_PATH" \
+   x86_64-w64-mingw32-g++ -shared -std=c++11 -I"$ORPHEUS_SDK/sdk" -I"$WDL_PATH" \
      reaper-plugins/reaper_csurf/csurf_main.cpp \
      reaper-plugins/reaper_csurf/*.cpp \
      -lws2_32 \
@@ -111,8 +111,8 @@ The resulting `reaper_csurf.dll` will be in the current directory.
 2. Set environment variables:
 
    ```sh
-   export REAPER_SDK="$HOME/projects/reaper-sdk"
-   export WDL_PATH="$REAPER_SDK/WDL"
+   export ORPHEUS_SDK="$HOME/projects/orpheus-sdk"
+   export WDL_PATH="$ORPHEUS_SDK/WDL"
    ```
 
 3. Generate macOS resource files for any plug-in that includes a
@@ -132,7 +132,7 @@ The resulting `reaper_csurf.dll` will be in the current directory.
 
    ```sh
    clang++ -dynamiclib -std=c++11 -arch x86_64 -arch arm64 \
-     -I"$REAPER_SDK/sdk" -I"$WDL_PATH" \
+     -I"$ORPHEUS_SDK/sdk" -I"$WDL_PATH" \
      reaper-plugins/reaper_csurf/csurf_main.cpp \
      reaper-plugins/reaper_csurf/*.cpp \
      -framework Cocoa \
@@ -154,7 +154,7 @@ The resulting `reaper_csurf.dll` will be in the current directory.
 3. Build the sample plug-in:
 
    ```sh
-   g++ -shared -fPIC -std=c++11 -I"$REAPER_SDK/sdk" -I"$WDL_PATH" \
+   g++ -shared -fPIC -std=c++11 -I"$ORPHEUS_SDK/sdk" -I"$WDL_PATH" \
      reaper-plugins/reaper_csurf/csurf_main.cpp \
      reaper-plugins/reaper_csurf/*.cpp \
      -o reaper_csurf.so
