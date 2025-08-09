@@ -1,10 +1,14 @@
-# ADMIN: Branch Protection (manual apply required)
-Go to: Settings → Branches → Add rule
-- Branch name pattern: main
-- Require a pull request before merging (1 approving review)
-- Require conversation resolution before merging
-- Require linear history: ON
-- Allow force pushes: OFF
-- Allow deletions: OFF
-- Include administrators: ON
-(We will add "Required status checks" after CI exists in Step 3.)
+# Preflight Audit
+
+Repository: chrislyons/reaper-sdk
+- Is fork: true
+- This repo default branch: main
+- Upstream (parent): justinfrankel/reaper-sdk
+- Upstream default branch: main
+- Upstream remote URL: git@github.com:justinfrankel/reaper-sdk.git
+
+Branch protection snapshot for `main`: `docs/branch-protection.main.json` (No permission to read branch protection via API — recorded placeholder {})
+
+Next steps:
+1) Archive snapshot tag/branch (Option 1 — Step 2).
+2) Hard-reset default branch to upstream default (Option 1 — Step 3).
